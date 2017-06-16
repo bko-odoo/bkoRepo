@@ -35,3 +35,5 @@ How to commit and push
 git diff mybranch-baris..master => to see difference between my branch and master
 	we can also do
 git diff HEAD..HEAD^1 => to see difference between curent head and commit before
+
+git reflog => to see all the commits that you have done in your repository
