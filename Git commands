@@ -30,8 +30,12 @@ How to commit and push
 	-git add 'filename' => add file by file to commit if you you dont wanna commit all
 	-git commit --amend => modify your last commit
 	-git revert HEAD^ => turn back to the commit before(parent commit) use HEAD^3 to get back to 3 commit
+	-git push -u enterprise-dev master-sla-bko => to push to odoo enterprise-dev (it is a remote) my branch
 
 
+other commands
+
+git merge master => merges your branch from master and puts your changements in it.
 
 git diff mybranch-baris..master => to see difference between my branch and master
 	we can also do
@@ -40,7 +44,6 @@ git diff HEAD..HEAD^1 => to see difference between curent head and commit before
 git reflog => to see all the commits that you have done in your repository
 
 
-other commands
 If you want to rename a branch while pointed to any branch, do:
 
 git branch -m <oldname> <newname>
