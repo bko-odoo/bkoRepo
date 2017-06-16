@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Training (internal)</title>
+    <meta charset="utf-8">
+    <style>
+
+        body {
+            font-family: Helvetica;
+        }
+        h1, h2, h3 {
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+        h1,h2,h3,h4 {
+            color: #444;
+        }
+
+        .remark-slide-content h1 { font-size: 2.5em; }
+        .remark-slide-content h2 { font-size: 1.7em; }
+        .remark-slide-content h3 { font-size: 1.2em; }
+        .footnote {
+            position: absolute;
+            bottom: 3em;
+        }
+        li p { line-height: 1.25em; }
+        .red { color: #fa0000; }
+        .large { font-size: 2em; }
+        a, a > code {
+            color: rgb(249, 38, 114);
+            text-decoration: none;
+        }
+        code {
+            background: #e7e8e2;
+            border-radius: 5px;
+        }
+        .remark-code, .remark-inline-code {
+            font-family: monospace;
+            font-size: 16px;
+        }
+        .remark-code-line-highlighted     { background-color: #373832; }
+        .pull-left {
+            float: left;
+            width: 47%;
+        }
+        .pull-right {
+            float: right;
+            width: 47%;
+        }
+        .pull-right ~ p {
+            clear: both;
+        }
+        #slideshow .slide .content code {
+            font-size: 0.8em;
+        }
+        #slideshow .slide .content pre code {
+            font-size: 0.9em;
+            padding: 15px;
+        }
+        .inverse {
+            /*background: #272822;*/
+            background: #444;
+            color: #e3e3e3;
+            text-shadow: 0 0 20px #333;
+        }
+        .inverse h1, .inverse h2 {
+            color: #f3f3f3;
+            line-height: 0.8em;
+        }
+        /* Slide-specific styling */
+        #slide-inverse .footnote {
+            bottom: 12px;
+            left: 20px;
+        }
+        #slide-how .slides {
+            font-size: 0.9em;
+            position: absolute;
+            top:  151px;
+            right: 140px;
+        }
+        #slide-how .slides h3 {
+            margin-top: 0.2em;
+        }
+        #slide-how .slides .first, #slide-how .slides .second {
+            padding: 1px 20px;
+            height: 90px;
+            width: 120px;
+            -moz-box-shadow: 0 0 10px #777;
+            -webkit-box-shadow: 0 0 10px #777;
+            box-shadow: 0 0 10px #777;
+        }
+        #slide-how .slides .first {
+            background: #fff;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            z-index: 1;
+        }
+        #slide-how .slides .second {
+            position: relative;
+            background: #fff;
+            z-index: 0;
+        }
+        blockquote {
+            border-left: 0.3em solid rgba(0,0,0,0.5);
+            padding: 0 15px;
+        }
+        .medium-pad-left {
+            padding-left: 10em;
+        }
+    </style>
+  </head>
+  <body>
+    <textarea id="source" style="display:none;">
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+layout: inverse
+# Javascript Training
+
+Gery Debongnie - RD Framework Team
+
+---
+layout: false
+class: middle,medium-pad-left
+# Plan
+
+1. Introduction
+2. Basics of JS
+3. Manipulating the DOM
+4. More advanced JS
+5. Asynchronous stuff
+6. Web APIs
+7. The future: ECMAScript > 5
+8. Structuring applications
+
+---
+layout: false
+class: middle,medium-pad-left
+# Instructions
+
+- work in small groups
+- Pad: http://pad.odoo.com/p/js-training
+- Questions: stop me any time...
+- experiment in the console (F12 in a browser)
+
+---
+class: inverse, middle, center
+
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 1                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 1. Introduction
+
+---
+# 1.1 Origins of JS
+
+- Created in 10 days in may 1995 (Brendan Eich, Netscape)
+- 1996-1997: standardisation by ECMA
+- Standard Updates: ECMAScript 2 (1998), ECMAScript 3 (1999)
+- 2005: Mozilla rejoined Ecma
+- 2009: ECMAScript 5
+- ...
+- Lots of work in browsers… much implementations... Problem bigs...
+- ...
+- JS is not so slow
+- ...
+- Most popular language in the world
+
+Note: ECMAScript is the standard, Javascript is the implementation
+
+---
+# 1.2 The Trinity: HTML/CSS/JS
+
+
+- content: HTML
+- presentation: CSS
+- behavior: JS
+
+Note: this is like, 1 million year old... no longer best practice
+
+---
+# 1.3 jQuery
+
+many js implementations = much problems
+
+=>
+
+jQuery: solve those problems (by being slower than all browsers combined)
+
+```javascript
+$('div').click(function () {
+    doSomething();
+});
+```
+
+---
+# 1.4 JS on the server
+
+- nodejs
+    - = JS on the server
+    - = we can rewrite everything in JS
+- npm (http://npmjs.com)
+    - package manager...
+    - many packages...
+    - some of them are even good...
+
+This allows SPA (single page applications) and isomorphic applications
+(pedantic way of saying that we share code between client and server)
+
+JS Everywhere (even this very presentation!)
+
+---
+# 1.5 JS Ecosystem
+
+- tooling:
+    - Module systems: CommonJS, AMD, ES2015
+    - Libraries: underscore, jquery, d3, …
+    - Package managers: npm, bower, jspm, duo, …
+    - Task runners: grunt, gulp, broccoli, cake, ...
+    - linters: jshint, jslint, ...
+    - type systems: flow, typescript
+    - minifiers, transpilers,
+
+
+- frameworks:
+    - Backbone
+    - Ember
+    - Knockout
+    - Polymer
+    - React
+    - Angular
+    - ...
+    - Odoo!
+
+Days since last JS Framework: 0 (source:
+https://dayssincelastjavascriptframework.com/)
+
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 2                                           -->
+<!-- ----------------------------------------------------------------------- -->
+## 2. Basics of Javascript
+
+---
+layout: false
+# 2.1 Interacting with JS
+
+- console
+- JSFiddle: https://jsfiddle.net
+- simple html file with script tag (inline, or with src="somefile.js")
+
+```html
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The HTML5 Herald</title>
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+</head>
+
+<body>
+  <script src="js/scripts.js"></script>
+</body>
+</html>
+```
+
+---
+# 2.2 Basic types/syntax
+
+- Types
+    - number:  0, 1, -3, 0.53, NaN
+    - boolean: true, false (fun fact: true !== 1)
+    - string: "hello", 'world'
+    - null
+    - undefined
+    - Array: [1,2,3]
+    - Object: {a: 1, b: 2}
+
+- Comments
+    ```javascript
+    // some comment (on one line)
+    /* this is
+    a multiline comment */
+    ```
+
+- Variables
+    ```javascript
+    var a = 1;
+    var b, c;
+    ```
+
+???
+numbers: no integer, no float, ...
+
+    Warning: object keys are string...
+
+---
+# 2.3 Basic operations
+
+Arithmetic: +, -, *, /
+```javascript
+var sum = 1 + 3;
+var i = 3 * 5;
+var j = 3 / 5;
+```
+
+Boolean stuff: &&, ||
+```javascript
+if (true && true) {
+    console.log('this is displayed');
+}
+var condition = a && (b || c);
+```
+
+Equality:
+```javascript
+a === b;
+a !== b;
+```
+(warning: equality by reference, never use == and !=)
+
+---
+# 2.3 Basic operations (part 2)
+
+Looping (for loop):
+```javascript
+for (var i = 0; i < 10; i++) {
+    console.log('iteration', i);
+}
+```
+
+Looping on object properties:
+```javascript
+var obj = {a: 1, b: "hey"};
+for (var prop in obj) {
+    console.log(prop);
+}
+// outputs: a, b
+```
+
+Looping on arrays:
+
+```javascript
+var animals = ['cat', 'dog', 'tomato'];
+for (var i = 0; i < animals.length; i++) {
+    console.log(animals[i]);
+}
+for (var animal of animals) {  // warning: this is ECMAScript 2015
+    console.log(animal)
+}
+```
+
+???
+
+discuss scoping of var...
+
+---
+# 2.4 Functions
+
+```javascript
+function test(x, y) {
+    return x + y;
+}
+
+var f = function (x,y) {
+    return x + y;
+};
+```
+
+Function are first class objects:
+```javascript
+function add(x) {
+    return x + 1;
+}
+
+var numbers = [1,3,5,7,9];
+
+console.log(numbers.map(add)); // output: [2, 4, 6, 8, 10]
+```
+
+---
+# 2.4 Functions (part 2)
+
+Function can be called with any number of arguments.  Missing arguments are then
+*undefined*.
+
+```javascript
+function test(x, y) {
+    return x + y;
+}
+
+test(1); // returns NaN
+test("1", "2"); // returns "12"
+test(1,2,13); // returns 3
+```
+
+Arguments can be accessed in special variable *arguments*
+```javascript
+function test() {
+    console.log("called with " + arguments.length + " arguments");
+    console.log("first argument: ", arguments[0]);
+    console.log("second argument: ", arguments[1]);
+    console.log("third argument: ", arguments[2]);
+}
+
+test();
+test(1, null)
+test(1, undefined);
+```
+
+---
+# 2.5 Variable hoisting
+
+```javascript
+function f() {
+    test = "hello";
+    var j = 5;
+
+    return test;
+    var test = 1;
+}
+
+f();
+```
+
+is equivalent to
+
+```javascript
+function f() {
+    var test;
+    var j;
+    test = "hello";
+    j = 5;
+
+    return test;
+    test = 1;
+}
+
+f();
+```
+
+---
+# 2.6 Scoping/Closures
+
+scoping = global, and functions
+
+```javascript
+// general scope here
+function f() {
+    // local scope A here
+    var test = "hello";
+    if (true) {
+        // still local scope A
+        test = 1;
+    }
+    // test === 1 here
+
+}
+```
+
+---
+# 2.6 Scoping/Closures (part 2)
+
+```javascript
+// global scope
+function makeCounter() {
+    // scope A
+    var value = 0;
+
+    return function increment() {
+        // scope B
+        value = value + 1;
+        console.log('counter is now', value);
+    };
+}
+
+var counter = makeCounter();
+
+counter(); // output: counter is now 1
+counter(); // output: counter is now 2
+```
+this shows: private variables in closure
+
+---
+# 2.6 Scoping/Closures (part 3)
+
+We can have some basic functionality of OOP :
+
+```javascript
+function makeCar() {
+    var speed = 0;
+    return {
+        accelerate: function () {
+            speed++;
+            console.log('car speed is now ', speed);
+        },
+        stop: function () {
+            speed = 0;
+            console.log('car speed is now ', speed);
+        },
+    };
+}
+
+var car = makeCar();
+car.accelerate(); // output: car speed is now 1
+car.accelerate(); // output: car speed is now 2
+car.stop();  // output: car speed is now: 0
+```
+
+---
+# 2.7 Exercises
+
+Write a todoo list program, which allows you to do something like this:
+
+```javascript
+var todoList = makeTodoList();
+
+todoList.read(); // []
+
+todoList.add("clean my room"); // 1 (the id of the new todo)
+todoList.add("read a book");   // 2
+
+todoList.read();
+// [
+//    {id: 1, text: "clean my room"},
+//    {id: 2, text: "read a book"}
+// ]
+
+```
+
+Help:
+MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+Bonus point:
+```javascript
+todoList.read(1) // {id: 1, text: "clean my room"}
+
+todoList.read(0) // undefined
+todoList.read(-25) // undefined
+```
+
+---
+# 2.7 Exercises (part 2)
+
+Bonus point 2: update values
+```javascript
+todoList.read(1); // {id: 1, text: "clean my room"}
+
+todoList.write(1, "make dinner");
+
+todoList.read(1) // {id: 1, text: "make dinner"}
+
+todoList.write(42, "make dinner");
+    // Uncaught Error: todo with id 42 not found
+```
+
+Bonus point 3: protected against external changes
+
+```javascript
+todoList.read(1) // {id: 1, text: "clean my room"}
+
+var todo = todoList.read(1);
+
+todo.text = "make dinner";
+
+todoList.read(1) // {id: 1, text: "clean my room")
+```
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 3                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 3. Manipulating the DOM
+
+---
+# 3.1 What is the DOM?
+
+DOM = Document Object Model = basically the internal tree structure + API to
+  examine it and to manipulate it
+
+The DOM can be accessed by the global object document
+
+#### getElementById
+
+```javascript
+var h1 = document.getElementById("3-1-what-is-the-dom-");
+h1.textContent = "Jean Valjean";
+```
+
+#### getElementsByClassName
+
+```javascript
+var div = document.getElementsByClassName('remark-visible')[0];
+div.style.backgroundColor = "red";
+```
+
+#### querySelector/querySelectorAll
+
+```javascript
+var slide = document.querySelector('.remark-visible .remark-slide-content');
+slide.innerHTML = "<h1>Inspecteur Javert<h1>";
+```
+
+---
+# 3.2 Modifying the DOM
+
+#### Protip
+
+inspect, then use $0 in console
+
+#### Creating an element
+
+```javascript
+var span = document.createElement("span");
+span.textContent = "Gavroche";
+var h1 = document.getElementById('3-2-modifying-the-dom');
+h1.appendChild(span);
+```
+
+#### jQuery
+
+pure javascript is much faster than jQuery.  But jQuery implements a large API
+on top of the DOM.
+
+See https://oscarotero.com/jquery/
+
+---
+# 3.3 Exercises
+
+Starting with the todoo app from previous chapter, add a graphical interface:
+
+- represent the current list of todos in a html table
+- add an input with a button Add to add todos
+
+Here is a suggested start:
+```javascript
+// model
+function makeTodoList() {
+    // we already did this
+}
+
+// view
+function renderTodoTable(todoList) {
+    // to be implemented
+}
+
+// controller
+function makeApplication() {
+    // to be implemented
+}
+
+// start
+makeApplication();
+```
+
+???
+
+Help: [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+
+---
+# 3.3 Exercises (part 2)
+
+#### Bonus point:
+
+in the table, add a column with a delete button, to delete only the
+corresponding todoo
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 4                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 4. More advanced Javascript
+
+---
+# 4.1 *this* keyword
+
+The *this* keyword is tricky: it represents the 'caller' of the function. It
+cannot be reassigned.
+
+```javascript
+function f() {
+    console.log(this);
+}
+
+var o = { a: 1, f: f };
+
+f(); // outputs: Window {...}
+o.f(); // outputs: Object {a: 1, f: f}
+```
+
+Conversely:
+```javascript
+var o = {
+    f: function f () {
+        console.log(this);
+    },
+};
+var f = o.f;
+o.f(); // outputs: Object {a: 1, f: f}
+f(); // outputs: Window {...}
+```
+
+---
+# 4.1 *this* keyword (part 2)
+
+#### Object oriented programming
+```javascript
+var counter = {
+    value: 0,
+    inc: function () {
+        this.value = this.value + 1;
+    },
+};
+
+counter.inc();
+counter.value;   // 1
+counter.inc();
+counter.value;   // 2
+```
+
+Now:
+```javascript
+document.body.addEventListener('click', obj.inc);
+```
+
+What happens when we click?
+
+---
+# 4.2 *bind* method
+
+```javascript
+document.body.addEventListener('click', obj.inc.bind(obj));
+```
+
+What happens when we click?
+
+Bound methods:
+
+```javascript
+function f() {
+    console.log(this.name);
+}
+var obj1 = {name: 'obj1', f: f};
+var obj2 = {name: 'obj2', f: f.bind(obj1)};
+
+obj1.f() // outputs: obj1
+obj2.f(); // outputs: obj1
+
+var f2 = obj2.f.bind(obj2);
+f2(); // outputs: obj1
+```
+
+---
+# 4.3 Objects and prototype chain
+
+No class system in JS.  But we have [prototypal inheritance](https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain).
+Each object has a 'prototype', which itself has a prototype, and so on, until we
+reach null.
+
+    null
+      |
+    obj1
+      |
+    obj2
+When we look up a property, we read in the current obj, then in its prototype,
+then its prototype's prototype, and so on.
+
+```javascript
+var obj1 = Object.create(null);
+var obj2 = Object.create(obj1);
+var obj3 = Object.create(obj2);
+obj3.a; // undefined
+obj3.a = 'in obj3';
+obj3.a; // 'in obj3'
+obj2.a; // undefined
+obj2.a = 'in obj 2';
+obj1.a = 'in obj 1';
+delete obj3.a;
+obj3.a; // 'in obj 2'
+delete obj2.a;
+obj3.a; // 'in obj 1'
+```
+
+---
+# 4.4 Classical OOP in JS (part 1)
+
+With prototypal inheritance, we can implement a class system (still not exactly
+the same as most system: classes can be dynamically extended/modified).
+
+The idea is:
+
+- create an object C (the *class*) which will contains all class properties
+- each instance is a new object with C as its prototype.
+
+```javascript
+var Rectangle = {
+    getPerimeter: function () {
+        return 2 * this.width + 2 * this.height;
+    },
+    getArea: function () {
+        return this.width * this.height;
+    },
+};
+
+function makeRectangle(w, h) {
+    var rectangle = Object.create(Rectangle);
+    rectangle.width = w;
+    rectangle.height = h;
+    return rectangle;
+}
+
+var r = makeRectangle(10,5);
+r.getArea(); // 50
+```
+
+---
+# 4.4 Classical OOP in JS (part 2)
+
+Classes and instances are not exactly what you might expect.  For example, they
+can dynamically be extended/modified:
+
+
+```javascript
+var Rectangle = {
+    getPerimeter: ...,
+    getArea: ...,
+};
+
+function makeRectangle(w, h) {
+    ...
+}
+
+var r = makeRectangle(10,5);
+r.getArea(); // 50
+
+
+// we add a method to the 'class' object:
+Rectangle.getDiagonal = function () {
+    return Math.sqrt(this.width**2 + this.height**2);
+};
+
+r.getDiagonal(); // 11.180339887498
+```
+
+---
+# 4.4 Classical OOP in JS (part 3)
+
+There is a special support for OOP in JS, to make it look more like classical
+OOP: the keyword [new](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new)
+(but it is still almost exactly the same as previous slide).
+
+To use the *new* keyword, we need a constructor, which is a function:
+
+```javascript
+function Rectangle(w, h) {
+    this.width = w;
+    this.height = h;
+}
+```
+
+Then, we add class properties on a special key: *prototype*:
+
+```javascript
+Rectangle.prototype.getPerimeter = function () {
+    return 2 * this.width + 2 * this.height;
+};
+Rectangle.prototype.getArea = function () {
+    return this.width * this.height;
+};
+```
+
+Then, we can use *new*:
+```javascript
+var r = new Rectangle(10,5);
+r.getArea(); // 50
+```
+
+---
+# 4.5 Exercises
+
+Rewrite the todoolist application to use the usual class system in JS (so, a
+class for Todoo, maybe for TodooList, or TodooTable, depending on your app).
+
+#### Bonus point
+
+add a boolean *completed* property on todoos, and add a select tag in the UI
+which allow the user to choose to display all, completed, or not completed.
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 5                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 5. Asynchronous stuff
+## also known as "the fun stuff"
+
+---
+# 5.1 JS Event loop
+
+Execution model:
+
+- everything is in a single thread, no multithreading
+- no multiprocess (well, modulo exceptions)
+- event loop: the JS VM takes the first event, execute its work completely
+  (synchronously), then wait for next event, and start all over again.
+
+This execution model eliminates many race conditions (it is so easy writing
+threadsafe code in JS...), but of course there are still many potential race
+conditions.
+
+Most basic primitive for async control: callbacks
+```javascript
+input.addEventListener('keydown', App.prototype.onKeydown.bind(this));
+```
+
+NodeJS: readFile is async, so VM basically sends the job to nodejs, then keep
+going whatever it needs, and a callback will be called whenever the job is done.
+
+```javascript
+fs.readFile('/path/to/my/file', 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+  console.log(data);
+});
+console.log('this line will be executed before the callback');
+```
+
+---
+# 5.2 setTimeout, setInterval
+
+#### setTimeout
+
+sets a timer which execute a callback whenever the timer expires.
+
+```javascript
+setTimeout(function () {
+    console.log("Fichtre ! fit Gavroche. Voilà qu'on me tue mes morts.");
+}, 1000); // returns 4 (or some other timerID)
+```
+
+#### setInterval
+
+repeatedly calls a function with a fixed time delay between each calls.
+
+```javascript
+var intervalID = setInterval(function () {
+    console.log("Fichtre ! fit Gavroche. Voilà qu'on me tue mes morts.");
+}, 1000);
+
+setTimeout(function () {
+    clearInterval(intervalID);
+}, 3500);
+```
+
+---
+# 5.3 Deferred, promises (part 1)
+
+Callbacks are a low level primitive to handle asynchronous code, but it has some
+problems:
+- hard to handle parallel computations (well, just slightly annoying)
+- sequential computations with callbacks usually leads to *callback hell*
+- not easily composable (the code that implements the callbacks has to know what
+  to do in case of success/failure, but sometimes, it does not know what to do,
+  and some other part of the application needs to handle the result).
+
+To illustrate these problem, let us simulate rpcs:
+
+```javascript
+function doRPC(route, onSuccessCb, onFailCb) {
+    console.log('[rpc initiated]', route);
+    var networkDelay = 100 + Math.random()*1000;
+    var isSuccessful = Math.random() < 0.9;
+    setTimeout(function () {
+        if (isSuccessful) {
+            var result = {route: route, data: Math.floor(Math.random()*10)}
+            console.log('[rpc successful]', route, result);
+            onSuccessCb(result);
+        } else {
+            console.log('[rpc failed]', route, networkDelay);
+            onFailCb();
+        }
+    }, networkDelay);
+}
+```
+
+---
+# 5.3 Deferred, promises (part 2)
+
+#### Exercise (callbacks and parallel computations)
+
+With previous doRPC function, do 3 rpcs in parallel, and display the sum of the
+results, when they are done (and successful).  Display an error if at least one
+of them fails.
+
+```javascript
+// maybe something here
+for (var i = 0; i < 3; i++) {
+    doRPC('/route/' + i, function () {
+        // something here
+    }, function () {
+        // something here
+    });
+}
+```
+
+Bonus Point: fail early (fail code should be executed as soon as one rpc fails
+(and only once!))
+
+???
+
+```javascript
+var completedRpcs = 0;
+var results = [];
+var hasFailed = false;
+for (var i = 0; i < 10; i++) {
+    doRPC('/route/' + i, function (result) {
+        if (!hasFailed) {
+            completedRpcs++;
+            results.push(result);
+            if (completedRpcs === 3) {
+                var sum = results[0].data + results[1].data + results[2].data;
+                console.log('SUCCESS', sum);
+            }
+        }
+        // something here
+    }, function () {
+        if (!hasFailed) {
+            hasFailed = true;
+            console.log('ERROR');
+        }
+    });
+}
+```
+
+---
+# 5.3 Deferred, promises (part 3)
+
+#### Exercise (callbacks and sequential computations)
+
+With previous doRPC function, do 3 sequential rpcs, if any of them fails, the
+subsequent computations should not be done, and a fail message should be
+displayed. If they succeed, display the sum of their data.
+
+```javascript
+doRPC('/route/1', function () {
+    // something here
+}, function () {
+    // something here
+});
+```
+
+???
+
+```javascript
+doRPC('/route/1', function (r1) {
+    doRPC('/route/2', function (r2) {
+        doRPC('/route/3', function (r3) {
+            console.log('SUCCESS', r1.data + r2.data + r3.data);
+        }, function () {
+            console.log('ERROR', '/route/3');
+        });
+
+    }, function () {
+        console.log('ERROR', '/route/2');
+    });
+}, function () {
+    console.log('ERROR', '/route/1');
+});
+```
+
+---
+# 5.3 Deferred, promises (part 4)
+
+We will use jQuery deferred (just so it is the same as Odoo).
+
+
+A Deferred is an abstraction to manage asynchronous tasks.  More precisely, it
+is an object that can be in 3 states (pending, resolved, rejected), on which
+you can register some callbacks to be executed when they are resolved/rejected
+
+```javascript
+var def = $.Deferred();
+console.log(def.state()); // pending
+
+def.then(function (result) {
+    console.log('def resolved with', result);
+}).fail(function (error) {
+    console.log('def failed', error);
+}).always(function () {
+    console.log('after success or error');
+});
+
+def.resolve(42); // will output 'def resolved with 42', then 'after ...'
+def.reject('unexpected error'); // will do nothing
+
+```
+
+---
+# 5.3 Deferred, promises (part 5)
+
+#### $.when
+
+The *$.when* function allow to synchronize on the result on parallel computations
+
+```javascript
+var def1 = $.Deferred();
+var def2 = $.Deferred();
+
+def1.then(function () {
+    console.log('def1 resolved');
+});
+def2.then(function () {
+    console.log('def1 resolved');
+});
+
+$.when(def1, def2).then(function (result1, result2) {
+    console.log('def1 and def2 resolved', result1 + result2);
+});
+
+def2.resolve(17); // display 'def2 resolved'
+// nothing happens here
+def1.resolve(43); // display 'def1 resolved', then 'def1 and ...'
+```
+
+---
+# 5.3 Deferred, promises (part 6)
+
+#### Exercise: Deferred and parallel computations
+
+Using the doRPC method from earlier, and deferreds, redo the previous exercise
+with 3 rpcs in parallel: display their sum if it succeeds, an error if not, and
+fail early.
+
+```javascript
+function doRPCDef(route) {
+    var def = $.Deferred();
+    doRPC(route, function (result) {
+        def.resolve(result);
+    }, function (error) {
+        def.reject(error);
+    });
+    return def;
+}
+
+var def1 = doRPCDef('/route/1');
+var def2 = doRPCDef('/route/2');
+var def3 = doRPCDef('/route/3');
+
+// something here
+```
+
+???
+
+```javascript
+$.when(def1, def2, def3).then(function (r1, r2, r3) {
+    var sum = r1.data + r2.data + r3.data;
+    console.log('SUCCESS', sum);
+}).fail(function () {
+    console.log('ERROR');
+});
+```
+
+---
+# 5.3 Deferred, promises (part 7)
+
+#### Chaining deferred
+
+Chaining deferred can be done by returning a deferred in a *then* callback.
+
+```javascript
+
+var def1 = $.Deferred();
+
+var def3 = def1.then(function () {
+    // we arrive here if def1 succeeds
+    var def2 = $.Deferred();
+    return def2;
+});
+
+def3.then(function () {
+    // only executed when def1 and def2 succeeds
+}).fail(function () {
+    // executed if def1 or def2 fails
+});
+```
+
+Question: where should I add code to handle failure specific to def2? and to def1?
+---
+# 5.3 Deferred, promises (part 8)
+
+
+#### Example: Deferred and sequential computations
+
+Using the doRPCDef method from earlier, and deferreds, redo the previous exercise
+with 3 sequential rpcs: display their sum if it succeeds, an error if not, and
+fail early.
+
+```javascript
+var sum = 0;
+
+function makeRPC(i) {
+    return doRPCDef('/route/' + i).then(function (result) {
+        sum += result.data;
+    }).fail(function () {
+        console.log('Error in route', i);
+    });
+}
+
+var sequence =
+    makeRPC(1).then(makeRPC.bind(null, 2)).then(makeRPC.bind(null, 3));
+
+sequence.then(function () {
+    console.log('SUCCESS', sum);
+}).fail(function () {
+    console.log('ERROR');
+});
+```
+
+---
+# 5.4 Exercises
+
+Let us go back to the TodoList application.  Now, we will suppose that the
+add and delete operations are asynchronous. Add this to your application to
+simulate the delay:
+
+```javascript
+function rpc(method) {
+    var def = $.Deferred();
+    var delay = Math.random()*100;
+    setTimeout(function () {
+        def.resolve();
+    }, def);
+    return def;
+}
+```
+
+Bonus point: modify the rpc method such that if it is called with method==='add',
+then it returns the id for the todo (the id is generated by the server).
+
+Bonus point: add a failure rate in the rpc method, and handle errors in the rest
+of the application
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 6                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 6. Web APIs
+
+---
+# 6.1 fetch/xhr
+
+### [xhr](https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest)
+
+```javascript
+function reqListener () {
+  console.log(this.responseText);
+}
+
+var oReq = new XMLHttpRequest();
+oReq.addEventListener("load", reqListener);
+oReq.open("GET", "http://www.example.org/example.txt");
+oReq.send();
+```
+
+### [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+```javascript
+var myImage = document.querySelector('img');
+
+fetch('flowers.jpg').then(function(response) {
+  return response.blob();
+}).then(function(myBlob) {
+  var objectURL = URL.createObjectURL(myBlob);
+  myImage.src = objectURL;
+});
+```
+
+---
+# 6.2 Storage
+
+[localStorage api](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage)
+
+This is used for storing information accross refresh/reload.
+
+```javascript
+localStorage.setItem('somekey', 'somevalue');
+
+var val = localStorage.getItem('somekey');
+```
+
+Warning: only strings are used for values (otherwise, it will be jsonified)
+
+---
+# 6.3 Notifications
+
+[notification API](https://developer.mozilla.org/en-US/docs/Web/API/notification)
+
+```javascript
+function notifyMe() {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  } else if (Notification.permission === "granted") {
+    // Let's check whether notification permissions have already been granted
+    // If it's okay let's create a notification
+    var notification = new Notification("Hi there!");
+  } else if (Notification.permission !== "denied") {
+    // Otherwise, we need to ask the user for permission
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification("Hi there!");
+      }
+    });
+  }
+  // At last, if the user has denied notifications, no need to do anything
+}
+```
+
+Note: does not work well with page opened with file:///
+
+---
+# 6.4 Web Workers
+
+[web workers api](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
+
+I told you that JS was single threaded... Well, I lied... there is an API for
+that
+
+BUT:
+
+- threads do not share memory
+- they can only communicate with messages
+
+This opens up very interesting architectural choices.  For example, an obvious
+use would be to have a UI thread, and another thread with the model of the
+application and potentially long computations.
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 7                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 7. The future: ECMAScript > 5
+
+
+---
+# 7.1 ES3/4/5/6/2015/2016
+
+- ES3 (1999)
+- ES5 (2009): modern JS
+- ES6 renamed ES2015 (2015):
+    - arrow functions,
+    - promises,
+    - classes,
+    - module system,
+    - ...
+- ES7 (unofficial), ES2016 (2016):
+    - ** operator,
+    - Array.prototype.includes
+- ES8 (unofficial), ES.Next: not yet complete
+    - probably: await/async
+
+
+---
+# 7.2 Classes
+
+[New class syntax](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
+
+```javascript
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  speak() {
+    console.log(this.name + ' makes a noise.');
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(this.name + ' barks.');
+  }
+}
+
+var d = new Dog('Mitzie');
+d.speak(); // Mitzie barks.
+```
+
+---
+# 7.3 Exercises
+
+Rewrite the todo application to use ES2015 classes instead of the prototype
+style.
+
+---
+class: inverse, middle, center
+<!-- ----------------------------------------------------------------------- -->
+<!--                        PART 8                                           -->
+<!-- ----------------------------------------------------------------------- -->
+# 8. Structuring applications
+
+---
+# 8.1 Module system
+
+- [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md): this is an API
+    to define JS modules (asynchronous)
+- [requireJS](http://requirejs.org/) implements AMD, in the browser
+- CommonJS: a (not complete) specification on how to define modules
+    (synchronously).  nodejs implement CommonJS (serverside).
+
+Many projects have a sourcetree with many files, and a buildprocess (Using
+webpack/gulp/browserify/...) to turn those files into a bundle.
+
+```javascript
+// Define a module (export)
+define('a', {
+   add: function(x, y){
+     return console.log(x + y);
+   }
+ });
+
+// Use the module (import)
+require(['a'], function(a){
+    a.add(1, 2);
+});
+
+require(['a'], function(a){
+    a.add(4, 6);
+});
+```
+
+---
+# 8.2 Exercises
+
+Rewrite the todo application to use AMD modules.  For example, you can have
+modules for:
+
+- utility functions
+- Todo class
+- TodoList class
+- TodoTable class
+- App class
+- main method (with require)
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script>
+        var slideshow = remark.create({
+            highlightLanguage: 'javascript',
+            // highlightStyle: 'monokai',
+        });
+    </script>
+  </body>
+</html>

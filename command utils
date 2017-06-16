@@ -1,0 +1,18 @@
+ ./odoo-bin --addons-path=addons --db-filter=master-test-10.0 -d master-test-10.0 //create new db and use it.
+
+
+./odoo-bin --addons-path=../odoo-Enterprise/enterprise,addons --db-filter=master-enterprise -d master-enterprise
+
+working hours field in res_company indicates type of contract
+in helpdesk/models/helpdes.py from line 590 function compute_sla is to do recalculate deadline
+
+./odoo-bin --addons-path=../odoo-Enterprise/enterprise,addons --db-filter=master-enterprise -d master-enterprise --dev all  // update dynamically
+
+
+self.env.user.company_id.resource_calendar_id.attendance_ids.read()[0].keys()
+
+302 fleet_vehicule_view
+<!-- add form as view mode doesn't work in enterprise-->
+
+import ipdb;
+ipdb.set_trace();

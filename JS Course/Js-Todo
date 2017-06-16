@@ -1,0 +1,125 @@
+function Todo(id,text)
+{
+	this.id =id;
+  this.text=text;
+  this.done = false;
+}
+Todo.prototype.hasBeenDone = function()
+    {
+      if(this.done){return ":))";}
+    	else {return ":((";}
+    }
+function makeTodoList()
+{
+    
+    var todos = [];
+    var nextID = 1;
+
+    function copy(todo) {
+        return new Todo(todo.id,todo.text);//{id: todo.id, text: todo.text};
+    }
+    function read(id) {
+        if (id !== undefined) {
+            var todo = todos.find(function (t) { return t.id === id});
+            return todo ? copy(todo) : undefined;
+        }
+        return todos.map(copy);
+    }
+    function add(text) {
+        todos.push(new Todo(nextID,text));
+        nextID++;
+    }
+    function remove(id) {
+                    var index = todos.findIndex(function (t) { return t.id === id});
+                                if (index > -1) {
+                            todos.splice(index, 1);
+                                }
+    }
+    function write(id, text) {
+        var todo = todos.find(function (t) { return t.id === id});
+        if (!todo) {
+            throw new Error('todo with id ' + id + ' not found')
+        }
+        todo.text = text;
+    }
+    function setDone(id) {
+        var todo = todos.find(function (t) { return t.id === id});
+        todo.done=!todo.done;
+        if (!todo) {
+            throw new Error('todo with id ' + id + ' not found')
+        }
+    }
+    return {
+        add: add,
+        read: read,
+        remove: remove,
+        write: write,
+        setDone:setDone,
+    };
+}
+
+// rendering
+function renderTodoTable(todoList) {
+                var table = document.createElement('table');
+    var todos = todoList.read();
+    for (var i = 0; i < todos.length; i++) {
+            var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + todos[i].id + '</td>';
+      tr.innerHTML += '<td>' + todos[i].text + '</td>';
+      tr.innerHTML += '<td class="delete" data-id="' + todos[i].id + '">X</td>';
+      tr.innerHTML += '<td class="isDone" data-id="' + todos[i].id + '">' + todos[i].hasBeenDone() + '</td>';
+      table.appendChild(tr);
+    }
+    return table;
+}
+
+// app
+function makeApplication() {
+    var node = document.getElementById('todoList');
+    var input = document.getElementsByTagName('input')[0];
+    var todoList = makeTodoList();
+
+    function updateTable() {
+        node.innerHTML = "";
+        var table = renderTodoTable(todoList);
+        node.appendChild(table);
+    }
+    function onKeyDown(ev) {
+        if (ev.keyCode === 13) {
+           var value = ev.target.value;
+           input.value = "";
+           todoList.add(value);
+           updateTable();
+        } 
+    }
+    function onClick(ev) {
+      //debugger
+      if (ev.target.className === 'delete') 
+      {
+         var id = Number(ev.target.dataset.id);
+         todoList.remove(id);
+         updateTable();
+         input.focus();
+      }
+      else if (ev.target.className === 'isDone') 
+      {
+     // debugger
+      	var id = Number(ev.target.dataset.id);
+        todoList.setDone(id);
+        updateTable();
+        input.focus();
+      }
+    }
+    input.addEventListener('keydown', onKeyDown);
+    node.addEventListener('click', onClick);
+}
+function rpc(method) {
+    var def = $.Deferred();
+    var delay = Math.random()*100;
+    setTimeout(function () {
+        def.resolve();
+    }, delay);
+    return def;
+}
+// start
+makeApplication();

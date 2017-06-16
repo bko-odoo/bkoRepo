@@ -1,0 +1,36 @@
+function doRPC(route, onSuccessCb, onFailCb) {
+    console.log('[rpc initiated]', route);
+    var networkDelay = 100 + Math.random()*1000;
+    var isSuccessful = Math.random() < 0.9;
+    setTimeout(function () {
+        if (isSuccessful) {
+            var result = {route: route, data: Math.floor(Math.random()*10)}
+            console.log('[rpc successful]', route, result);
+            onSuccessCb(result);
+        } else {
+            console.log('[rpc failed]', route, networkDelay);
+            onFailCb();
+        }
+    }, networkDelay);
+}
+
+function doRPCDef(route) {
+    var def = $.Deferred();
+    doRPC(route, function (result) {
+        def.resolve(result);
+    }, function (error) {
+        def.reject(error);
+    });
+    return def;
+}
+
+var def1 = doRPCDef('/route/1');
+var def2 = doRPCDef('/route/2');
+var def3 = doRPCDef('/route/3');
+$.when(def1, def2, def3).then(function (r1,r2,r3)
+{
+	var sum = r1.data+r2.data+r3.data;
+  console.log('Success',sum);
+}).fail(function (){console.log('Error');})
+
+

@@ -1,0 +1,46 @@
+RPC Parallel
+
+
+function doRPC(route, onSuccessCb, onFailCb) 
+{
+    console.log('[rpc initiated]', route);
+    var networkDelay = 100 + Math.random()*1000;
+    var isSuccessful = Math.random() < 0.9;
+    setTimeout(function () 
+    {
+        if (isSuccessful) 
+        {
+            var result = {route: route, data: Math.floor(Math.random()*10)}
+            console.log('[rpc successful]', route, result);
+            onSuccessCb(result);
+        } else
+        {
+            console.log('[rpc failed]', route, networkDelay);
+            onFailCb();
+        }
+    }, networkDelay);
+}
+
+var completedRpcs = 0;
+var results = [];
+var hasFailed = false;
+for (var i = 0; i < 3; i++) {
+    doRPC('/route/' + i, function (result) {
+        if (!hasFailed) {
+            completedRpcs++;
+            results.push(result);
+            if (completedRpcs === 3) {
+                var sum = results[0].data + results[1].data + results[2].data;
+                console.log('SUCCESS', sum);
+            }
+        }
+        // something here
+    }, function () {
+        if (!hasFailed) {
+            hasFailed = true;
+            console.log('ERROR');
+        }
+    });
+}
+
+
