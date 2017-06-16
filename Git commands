@@ -30,7 +30,7 @@ How to commit and push
 	-git add 'filename' => add file by file to commit if you you dont wanna commit all
 	-git commit --amend => modify your last commit
 	-git revert HEAD^ => turn back to the commit before(parent commit) use HEAD^3 to get back to 3 commit
-	-git push -u enterprise-dev master-sla-bko => to push to odoo enterprise-dev (it is a remote) my branch
+	-git push -u odoo-dev master-sla-bko => to push to odoo-dev (it is a remote) my branch
 
 
 other commands
@@ -54,4 +54,17 @@ git branch -m <newname>
 
 example:
 	git branch -m master master-master-fleet-bko
+
+Cases to study
+update your file from master and keep your changes then try to push
+clone repository to your desktop
+edit your commit and push without forcing it
+commit with conflict
+
+Example : Some changes for conflict
+
+
+
+
+
 
