@@ -32,8 +32,23 @@ How to commit and push
 	-git revert HEAD^ => turn back to the commit before(parent commit) use HEAD^3 to get back to 3 commit
 
 
+
 git diff mybranch-baris..master => to see difference between my branch and master
 	we can also do
 git diff HEAD..HEAD^1 => to see difference between curent head and commit before
 
 git reflog => to see all the commits that you have done in your repository
+
+
+other commands
+If you want to rename a branch while pointed to any branch, do:
+
+git branch -m <oldname> <newname>
+
+If you want to rename the current branch, you can do:
+
+git branch -m <newname>
+
+example:
+	git branch -m master master-master-fleet-bko
+
