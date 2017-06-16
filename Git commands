@@ -55,3 +55,6 @@ git branch -m <newname>
 example:
 	git branch -m master master-master-fleet-bko
 
+
+# some changes in my branch to have conflict
+
