@@ -1,0 +1,33 @@
+ 
+Git usage Odoo
+
+    [IMP] for improvements
+    [FIX] for bug fixes
+    [REF] for refactoring
+    [ADD] for adding new resources
+    [REM] for removing of resources
+    [MOV] for moving files (Do not change content of moved file, otherwise Git will loose track, and the history will be lost !), or simply moving code from a file to another one.
+    [MERGE] for merge commits (only for forward/back-port)
+    [CLA] for signing the Odoo Individual Contributor License
+
+Exemple 
+ [FIX] helpdesk: SLA ticket deadline
+
+Calculation of ticket deadline based on SLA policy
+and working days of resource(company)
+
+Reason:
+Ticket deadline was calculated just by adding SLA policy on ticket date
+creation so deadline could be a date when company was closed.
+
+How to commit and push
+	-git status => to see what you can commit like modified files or new files
+	-git diff => to see difference between old and new files
+	-git rebase master => to download files from master and to date with master
+	-git checkout 'filename' is to revert all changes on file
+	-git rebase -i =>interactif rebase (donnow how to use)
+	-git add -A => add all changed files to your commit
+	-git add 'filename' => add file by file to commit if you you dont wanna commit all
+	-git commit --amend => modify your last commit
+	-git revert HEAD^ => turn back to the commit before(parent commit) use HEAD^3 to get back to 3 commit
+
