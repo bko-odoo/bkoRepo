@@ -31,3 +31,15 @@ How to commit and push
 	-git commit --amend => modify your last commit
 	-git revert HEAD^ => turn back to the commit before(parent commit) use HEAD^3 to get back to 3 commit
 
+other commands
+If you want to rename a branch while pointed to any branch, do:
+
+git branch -m <oldname> <newname>
+
+If you want to rename the current branch, you can do:
+
+git branch -m <newname>
+
+example:
+	git branch -m master master-master-fleet-bko
+
