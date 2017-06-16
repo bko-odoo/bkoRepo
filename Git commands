@@ -31,3 +31,7 @@ How to commit and push
 	-git commit --amend => modify your last commit
 	-git revert HEAD^ => turn back to the commit before(parent commit) use HEAD^3 to get back to 3 commit
 
+
+git diff mybranch-baris..master => to see difference between my branch and master
+	we can also do
+git diff HEAD..HEAD^1 => to see difference between curent head and commit before
