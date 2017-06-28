@@ -16,3 +16,12 @@ self.env.user.company_id.resource_calendar_id.attendance_ids.read()[0].keys()
 
 import ipdb;
 ipdb.set_trace();
+
+dependence in manifest : obligates to install module before 
+
+search_count=> domain with count
+
+for tests=>
+./odoo-bin --addons-path=../odoo-Enterprise/enterprise,addons --db-filter=master-fleet-bko -d master-fleet-bko -u helpdesk --test-enable
+
+

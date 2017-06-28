@@ -1,0 +1,8 @@
+woof ps-scripts.zip -c 20
+
+check for virtual env
+check fish instead of bash (good for backporting changements to older versions of application)
+what is reverse engineeringq
+
+web?debug
+web?debug=assets

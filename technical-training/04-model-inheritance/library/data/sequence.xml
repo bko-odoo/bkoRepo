@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="library_book_copy_sequence" model="ir.sequence">
+        <field name="name">sequence.book.copy</field>
+        <field name="implementation">standard</field>
+        <field name="code">BOOKCPY</field>
+        <field name="prefix">CPY</field>
+        <field name="padding">5</field>
+        <field name="number_increment">1</field>
+    </record>
+
+</odoo>

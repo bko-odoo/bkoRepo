@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">openacademy.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Add Attendees">
+                    <group>
+                        <field name="session_ids" readonly="1"/>
+                        <field name="attendee_ids"/>
+                    </group>
+                    <footer>
+                        <button name="subscribe" type="object"
+                                string="Subscribe" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <report
+            id="send_invitation"
+            model="openacademy.session"
+            string="Invitations"
+            report_type="qweb-pdf"
+            name="openacademy.invitations"
+            file="openacademy.invitations"
+            attachment_use="True"
+        />
+        <template id="invitations">
+            <t t-call="report.external_layout">
+                <thead>
+                    <div>
+                        Adresse : blab blalb
+                    </div>
+                </thead>
+                <tbody>
+                    <div>
+                        Inivted to session machin
+                    </div>
+                    <div>
+                        <t t-foreach="docs" t-as="o">
+                            <t t-call="report.external_layout">
+                                <div class="page">
+                                    <h2>Report title</h2>
+                                    <p>This object's name is <span t-field="o.name"/></p>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </tbody>
+
+            </t>
+        </template>
+        <act_window id="launch_session_wizard"
+                    name="Add Attendees"
+                    src_model="openacademy.session"
+                    res_model="openacademy.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+    </data>
+</odoo>

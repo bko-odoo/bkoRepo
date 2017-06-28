@@ -1,0 +1,4 @@
+@http.route => search in the code python
+
+json.dump => can be sent by serveur in json format
+

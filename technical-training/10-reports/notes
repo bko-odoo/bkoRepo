@@ -1,0 +1,17 @@
+http://localhost:8069/report/html/openacademy.invitations
+use qweb to generate reports pdf
+add first rapport
+then template to report
+ when printing clicked values are in variable named docs in the template
+
+example account_statement report is good one to see several usage of t
+t-raw includes content of t-call 
+
+paper format:
+	top-margin
+	header spacing
+	
+
+template de mail utilise jinja et non pas de qweb
+
+to set invisible create/edit button in tree view you can use attribute create="0" 
