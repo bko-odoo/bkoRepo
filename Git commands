@@ -22,6 +22,8 @@ creation so deadline could be a date when company was closed.
 
 How to commit and push
 	-git reset master --hard => reset all you have done and up to date with master
+	-git stash => reset changes also
+	-git stash pop => revert stash
 	-git status => to see what you can commit like modified files or new filesgit 
 	-git diff => to see difference between old and new files
 	-git rebase master => to download files from master and to date with master
@@ -43,6 +45,7 @@ How to be up to date with master and remote
 
 other commands
 
+---------------------------------------------------------------
 git rebase -i HEAD~2 => merge your 2 last commits into one.
 then you will see in the file
 	pick 0775464 msg
@@ -53,7 +56,7 @@ git rebase --continue /--abort => as you wish
 git commit --amend is possible to change your merged commits msg
 then git push -f (force because you will be rejected) odoo-dev master-bko-branch
 
-
+---------------------------------------------------------------
 git merge master => merges your branch from master and puts your changements in it.
 
 git diff mybranch-baris..master => to see difference between my branch and master
@@ -62,20 +65,23 @@ git diff HEAD..HEAD^1 => to see difference between curent head and commit before
 
 git reflog => to see all the commits that you have done in your repository
 
-
+--------------------------------------------------------------
 If you want to rename a branch while pointed to any branch, do:
 
-git branch -m <oldname> <newname>
+	git branch -m <oldname> <newname>
 
 If you want to rename the current branch, you can do:
 
-git branch -m <newname>
+	git branch -m <newname>
 
 example:
 	git branch -m master master-master-fleet-bko
 
+if you want to remove a branch 
 
-# some changes in my branch to have conflict
+	git branch -d or -D branchname
+
+---------------------------------------------------------------
 
 Cases to study
 update your file from master and keep your changes then try to push
@@ -83,6 +89,3 @@ clone repository to your desktop
 edit your commit and push without forcing it
 commit with conflict
 
-Example : Some changes for conflict
-
-57
