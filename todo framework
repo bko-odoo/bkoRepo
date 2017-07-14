@@ -1,0 +1,1 @@
+The 'Create an Edit' shouldn't be displayed on a x2many or a many2one if the user actually can't create the record due to the access rights

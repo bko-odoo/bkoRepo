@@ -1,0 +1,145 @@
+
+git clone git@github.com:odoo/technical-training.git
+sudo pip install xlsxwriter
+
+To update the apps list:
+
+    debug mode -> update apps list
+
+    parameter '-u base' when launching odoo-bin
+
+
+Keyboard shortcuts:
+
+    alt + 'h' -> home
+
+    start typing to search something
+
+
+@api.multi decorator -> Decorate a method to ensure that 'self' returns a list of records
+@api.one decorator -> NOT A GOOD PRACTICE -> 'self' is a unique record 
+
+07 module not complete: no solution
+
+XPATH: http://online-toolz.com/tools/xpath-editor.php
+
+Questions Monday
+
+    How do you access the odoo shell ?
+
+    'shell' parameter without '--'
+
+    How can we execute directly sql queries from the code?
+
+    Is it possible to visualize database records into Odoo ?
+
+    How to test the freshly created model with some mockup/demo data ?
+
+    see "demo data xml" example: library_data.xmlf
+
+    configure in "__manifest__.py"
+
+    possible to use "noupdate" attribute in xml <data "noupdate"=1>
+
+    Is it possible to physically remove columns from a table with Python?
+
+    automatic when a column is not used anymore at the ORM level
+
+    Does Odoo have a possibility to backup local database and in case of emergency return to specified date?
+
+
+
+Questions Tuesday
+
+    Are there other specific fields like 'currency'. For example an 'email' field with email validation ?
+
+    Yes, there is a widget "email" which is a simple Char field without client validation nor server validation.
+
+    The only thing it does is changing the display to a clickable "mailto" link.
+
+    You have to use a regex constraint at the ORM level (raise a validation error)
+
+    Is there some documentation or list about available widgets ?
+
+    Yes, in source code : addons/web/static/src/js/views/form_widgets.js
+
+    Is it necessary to use form view to create or update data? Can we do it from list view?
+
+    Tree view has an "editable" attribute but it disable the form view. But treeview can have buttons that could open a formview
+
+    If we can, is it possible to activate or desactivate form view for certain cases? (for example: we have a list view grouped by record.type and we click on button create)
+
+    Does it exist certification for Odoo Partners ?
+
+
+
+Questions Wednesday
+
+    Is there a list of css attributes that we can use in the treeviews and friends ? (like "decoration-bf" ?)
+
+    Odoo use bootstrap and we can use bootstrap styles
+
+    Is it possible to modify the main layout (with CSS) ?
+
+    Can we use the "xpath" method to update xml demo-data ? For example add data to a base res.partner demo data.
+
+    No, impossible because it's not the same. xpath is used only in views inherita
+
+    It's easier to use the same record-id as the original demo-data and the new fields will be added automatically.
+
+    Can you help me install Odoo tomorrow morning if I have any issue?
+
+    Can you re-explain the difference between xml id, id, etc. ?
+
+    Where are the views and template stored? can we modify it through the shell ?
+
+    Is there any documentation about how to use QWeb ?
+
+    Yes, there is some drinkable doc at https://www.odoo.com/documentation/10.0/reference/qweb.html
+
+    If we decide to use odoo community personally where can we define parameters like email server,  website address ..
+
+    How can we use new fontawesome icon in the application and is it possible to choose icon color?
+
+    They are all available in Odoo css styles
+
+
+Question Thursday
+
+    est-ce que tu pourrais réexpliquer la différence entre view_type et view_mode ?  et les différents types de décorations
+
+    Is it possible to add button in header's tree view ?
+
+    Is it possible to create an object without touching the database directly.
+
+    Example:
+
+    got = Book.create({ 'name' : 'Game of Thrones'})
+
+    got.author = 'blabla'
+
+    got.save() or got.commit() or... something else
+
+    Yes, by using new
+
+    If a unexisting group is specified in a security .csv file, will it be created at the starting time ?
+
+    If someone with 'create' rights create a record but does not have 'write' rights, is he able to modify is own data ?
+
+    No, he needs 'write'
+
+
+
+Questions Friday
+
+    Is it possible to contribute to the documentation?
+
+
+
+
+
+
+
+
+
+
