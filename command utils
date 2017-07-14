@@ -25,3 +25,33 @@ for tests=>
 ./odoo-bin --addons-path=../odoo-Enterprise/enterprise,addons --db-filter=master-fleet-bko -d master-fleet-bko -u helpdesk --test-enable
 
 
+on a field _id represents many2one 
+	_ids x2many list of record
+
+
+o_menu_systray => for web toolbar icons
+Add item to systray and add widget for actions etc.
+
+
+config email
+<record id="base.ir_mail_server_localhost0" model="ir.mail_server">
+            <field name="name">smtp.openerp.com</field>
+            <field name="smtp_host">smtp.openerp.com</field>
+            <field name="smtp_port">2525</field>
+            <field name="smtp_encryption">starttls</field>
+            <field name="smtp_user">bko</field>
+            <field name="smtp_pass">WonilAt6</field>
+        </record>
+
+        <record id="base.mail_catchall_domain" model="ir.config_parameter">
+            <field name="key">mail.catchall.domain</field>
+            <field name="value">odoo.com</field>
+        </record>
+
+
+cut all postgres connections => sudo /etc/init.d/postgresql restart
+
+groups="base.group_no_one" => show only in debug mode
+
+
+, domain="[('is_company', '=', False)]" => add domain to field that filters your drop down menu
